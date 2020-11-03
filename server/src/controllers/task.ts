@@ -1,6 +1,6 @@
-const Task = require('../models/task');
+import Task from '../models/task';
 
-exports.createTask = (req, res) => {
+export const createTask = (req: any, res: any) => {
     const task = new Task({ ...req.body, listId: req.params.listId });
 
     task.save((err, task) => {
@@ -10,7 +10,7 @@ exports.createTask = (req, res) => {
     });
 };
 
-exports.getTask = (req, res) => {
+export const getTask = (req: any, res: any) => {
     Task.findById(req.params.id, (err, task) => {
         if (err) return res.status(500).json(err);
 
@@ -18,7 +18,7 @@ exports.getTask = (req, res) => {
     });
 };
 
-exports.updateTask = (req, res) => {
+export const updateTask = (req: any, res: any) => {
     Task.findByIdAndUpdate(
         req.params.id,
         { ...req.body },
@@ -33,7 +33,7 @@ exports.updateTask = (req, res) => {
     );
 };
 
-exports.deleteTask = (req, res) => {
+export const deleteTask = (req: any, res: any) => {
     Task.findByIdAndRemove(req.params.id, (err, task) => {
         if (err) {
             return res.status(500).json(err);

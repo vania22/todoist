@@ -1,15 +1,15 @@
 const jwt = require('jwt-simple');
 const User = require('../models/user');
 
-const tokenForUser = (user) => {
+const tokenForUser = (user: any) => {
     const timestamp = new Date().getTime();
-    return jwt.encode({ sub: user.id, iat: timestamp }, 'secret');
+    return jwt.encode({ sub: user._id, iat: timestamp }, 'secret');
 };
 
-exports.signUp = (req, res) => {
+export const signUp = (req: any, res: any) => {
     const email = req.body.email;
 
-    User.findOne({ email }, (err, user) => {
+    User.findOne({ email }, (err: any, user: any) => {
         if (err) {
             return res.status(400).json(err);
         } else if (user) {
@@ -17,7 +17,7 @@ exports.signUp = (req, res) => {
         } else {
             const user = new User(req.body);
 
-            user.save((err, user) => {
+            user.save((err: any, user: any) => {
                 if (err) {
                     return res.status(500).json(err);
                 } else {
@@ -38,7 +38,7 @@ exports.signUp = (req, res) => {
     });
 };
 
-exports.signIn = (req, res) => {
+export const signIn = (req: any, res: any) => {
     const { email, firstName, lastName, _id } = req.user;
 
     return res.json({

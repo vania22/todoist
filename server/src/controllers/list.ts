@@ -1,7 +1,7 @@
-const List = require('../models/list');
-const Task = require('../models/task');
+import List from '../models/list';
+import Task from '../models/task';
 
-exports.createList = (req, res) => {
+export const createList = (req: any, res: any) => {
     const list = new List(req.body);
 
     list.save((err, list) => {
@@ -11,7 +11,7 @@ exports.createList = (req, res) => {
     });
 };
 
-exports.getList = (req, res) => {
+export const getList = (req: any, res: any) => {
     List.findById(req.params.id, (err, list) => {
         if (err) return res.status(500).json(err);
 
@@ -19,7 +19,7 @@ exports.getList = (req, res) => {
     });
 };
 
-exports.updateList = (req, res) => {
+export const updateList = (req: any, res: any) => {
     List.findByIdAndUpdate(
         req.params.id,
         { ...req.body },
@@ -34,12 +34,12 @@ exports.updateList = (req, res) => {
     );
 };
 
-exports.deleteList = (req, res) => {
+export const deleteList = (req: any, res: any) => {
     List.findByIdAndRemove(req.params.id, (err, list) => {
         if (err) {
             return res.status(500).json(err);
         } else {
-            Task.deleteMany({ listId: req.params.id }, (err, tasks) => {
+            Task.deleteMany({ listId: req.params.id }, (err: any): void => {
                 if (err) {
                     return res.status(500).json(err);
                 }

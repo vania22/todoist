@@ -1,5 +1,12 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt-nodejs');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt-nodejs';
+
+export interface IUser extends mongoose.Document {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -26,7 +33,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre('save', function (next) {
-    const user = this;
+    const user = <IUser>this;
 
     bcrypt.genSalt(10, (err, salt) => {
         if (err) return next(err);
@@ -40,7 +47,10 @@ userSchema.pre('save', function (next) {
     });
 });
 
-userSchema.methods.comparePasswords = function (plainPassword, callback) {
+userSchema.methods.comparePasswords = function (
+    plainPassword: string,
+    callback: any,
+) {
     bcrypt.compare(plainPassword, this.password, (err, result) => {
         if (err) return callback(err);
 
@@ -48,6 +58,6 @@ userSchema.methods.comparePasswords = function (plainPassword, callback) {
     });
 };
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model<IUser>('User', userSchema);
 
-module.exports = User;
+export default User;

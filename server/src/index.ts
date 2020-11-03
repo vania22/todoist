@@ -1,12 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
+import express from 'express';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import mongoose from 'mongoose';
+
 const app = express();
 
-const authRoutes = require('./routes/auth');
-const listRoutes = require('./routes/list');
-const taskRoutes = require('./routes/task');
+import authRoutes from './routes/auth';
+import listRoutes from './routes/list';
+import taskRoutes from './routes/task';
 
 mongoose
     .connect('mongodb://localhost/todoist', {

@@ -1,20 +1,22 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const passportService = require('../passport/passport');
-const passport = require('passport');
+
+import passport from 'passport';
+import passportService from '../passport/passport';
+passportService();
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 
-const {
+import {
     createList,
     getList,
     updateList,
     deleteList,
-} = require('../controllers/list');
+} from '../controllers/list';
 
 router.post('/list', requireAuth, createList);
 router.get('/list/:id', requireAuth, getList);
 router.patch('/list/:id', requireAuth, updateList);
 router.delete('/list/:id', requireAuth, deleteList);
 
-module.exports = router;
+export default router;

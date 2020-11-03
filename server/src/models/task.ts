@@ -1,5 +1,20 @@
-const { ObjectId } = require('bson');
-const mongoose = require('mongoose');
+import { IList } from './list';
+import mongoose from 'mongoose';
+
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
+export enum DateRange {
+    TODAY = 'Today',
+    TOMORROW = 'Tomorrow',
+    NEXT_WEEK = 'Next 7 days',
+}
+
+export interface ITask extends mongoose.Document {
+    name: string;
+    completed: boolean;
+    dateRange: DateRange;
+    listId: IList['_id'];
+}
 
 const taskSchema = new mongoose.Schema(
     {
@@ -22,6 +37,6 @@ const taskSchema = new mongoose.Schema(
     { timestamps: true },
 );
 
-const Task = mongoose.model('Task', taskSchema);
+const Task = mongoose.model<ITask>('Task', taskSchema);
 
-module.exports = Task;
+export default Task;
