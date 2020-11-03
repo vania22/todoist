@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const app = express();
 
+const authRoutes = require('./routes/auth');
+
 mongoose
     .connect('mongodb://localhost/todoist', {
         useNewUrlParser: true,
@@ -15,6 +17,7 @@ mongoose
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());
+app.use(authRoutes);
 
 app.listen(3000, () => {
     console.log('Server started');

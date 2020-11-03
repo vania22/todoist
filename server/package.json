@@ -1,12 +1,23 @@
 {
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.10.11",
-    "morgan": "^1.10.0",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
-  }
+    "name": "todoist-server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "ikrupskyi",
+    "license": "MIT",
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "bcrypt-nodejs": "^0.0.3",
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "jwt-simple": "^0.5.6",
+        "mongoose": "^5.10.11",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.6",
+        "passport": "^0.4.1",
+        "passport-jwt": "^4.0.0",
+        "passport-local": "^1.0.0"
+    }
 }
