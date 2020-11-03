@@ -17,7 +17,7 @@ const taskSchema = new mongoose.Schema(
             default: 'Today',
             enum: ['Today', 'Tomorrow', 'Next 7 days'],
         },
-        list: { type: ObjectId, ref: 'List' },
+        listId: { type: ObjectId, ref: 'List' },
     },
     { timestamps: true },
 );

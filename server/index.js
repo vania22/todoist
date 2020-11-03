@@ -6,6 +6,7 @@ const app = express();
 
 const authRoutes = require('./routes/auth');
 const listRoutes = require('./routes/list');
+const taskRoutes = require('./routes/task');
 
 mongoose
     .connect('mongodb://localhost/todoist', {
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 
 app.use(authRoutes);
 app.use(listRoutes);
+app.use(taskRoutes);
 
 app.listen(3000, () => {
     console.log('Server started');
