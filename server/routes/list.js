@@ -5,9 +5,16 @@ const passport = require('passport');
 
 const requireAuth = passport.authenticate('jwt', { session: false });
 
-const { createList, getList } = require('../controllers/list');
+const {
+    createList,
+    getList,
+    updateList,
+    deleteList,
+} = require('../controllers/list');
 
 router.post('/list', requireAuth, createList);
 router.get('/list/:id', requireAuth, getList);
+router.patch('/list/:id', requireAuth, updateList);
+router.delete('/list/:id', requireAuth, deleteList);
 
 module.exports = router;

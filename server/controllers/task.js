@@ -17,3 +17,28 @@ exports.getTask = (req, res) => {
         return res.json(task);
     });
 };
+
+exports.updateTask = (req, res) => {
+    Task.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body },
+        { new: true },
+        (err, task) => {
+            if (err) {
+                return res.status(500).json(err);
+            } else {
+                return res.json(task);
+            }
+        },
+    );
+};
+
+exports.deleteTask = (req, res) => {
+    Task.findByIdAndRemove(req.params.id, (err, task) => {
+        if (err) {
+            return res.status(500).json(err);
+        } else {
+            return res.json(task);
+        }
+    });
+};
